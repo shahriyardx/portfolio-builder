@@ -22,6 +22,8 @@ import {
 } from "@/components/ui/dropdown-menu"
 import { useIsMobile } from "@/hooks/use-mobile"
 import { useTheme } from "next-themes"
+import useSession from "@/hooks/use-session"
+import { authClient } from "@/lib/auth-client"
 
 const navItems = [
   { label: "Home", href: "/" },
@@ -33,12 +35,10 @@ const navItems = [
 export function Navbar() {
   const { theme, setTheme } = useTheme()
   const [isOpen, setIsOpen] = useState(false)
-  const [isSignedIn, setIsSignedIn] = useState(false)
   const isMobile = useIsMobile()
 
-  const handleSignIn = () => setIsSignedIn(true)
-  const handleSignOut = () => setIsSignedIn(false)
-
+  const { data } = useSession()
+  console.log(data)
   const toggleTheme = () => {
     setTheme(theme === "dark" ? "light" : "dark")
   }
@@ -81,7 +81,7 @@ export function Navbar() {
             <Button onClick={toggleTheme} size={"icon"} variant={"outline"}>
               <ThemeIcon size={15} />
             </Button>
-            {isSignedIn ? (
+            {data ? (
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <Button
@@ -125,7 +125,7 @@ export function Navbar() {
                   </DropdownMenuItem>
                   <DropdownMenuSeparator />
                   <DropdownMenuItem
-                    onClick={handleSignOut}
+                    onClick={() => authClient.signOut()}
                     className="text-red-600 cursor-pointer"
                   >
                     <LogOut className="mr-2 h-4 w-4" />
@@ -134,7 +134,9 @@ export function Navbar() {
                 </DropdownMenuContent>
               </DropdownMenu>
             ) : (
-              <Button onClick={handleSignIn}>Sign In</Button>
+              <Button>
+                <Link href={"/auth/sign-in"}>Sign In</Link>
+              </Button>
             )}
           </div>
 
@@ -168,7 +170,7 @@ export function Navbar() {
                     </Link>
                   ))}
                   <div className="border-t border-border pt-4 flex flex-col space-y-2">
-                    {isSignedIn ? (
+                    {data ? (
                       <>
                         <div className="flex items-center gap-2 p-2 mb-2">
                           <Avatar className="h-8 w-8">
@@ -202,7 +204,7 @@ export function Navbar() {
                           variant="destructive"
                           className="w-full"
                           onClick={() => {
-                            handleSignOut()
+                            authClient.signOut()
                             setIsOpen(false)
                           }}
                         >
@@ -211,16 +213,15 @@ export function Navbar() {
                         </Button>
                       </>
                     ) : (
-                      <>
+                      <div className="p-3">
                         <Button
                           variant="outline"
                           className="w-full bg-transparent"
-                          onClick={handleSignIn}
+                          asChild
                         >
-                          Sign In
+                          <Link href={"/auth/sign-in"}>Sign In</Link>
                         </Button>
-                        <Button className="w-full">Get Started</Button>
-                      </>
+                      </div>
                     )}
                   </div>
                 </div>
