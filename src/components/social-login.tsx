@@ -4,12 +4,9 @@ import { Field } from "./ui/field"
 import { Button } from "./ui/button"
 import { AiOutlineGithub, AiOutlineGoogle } from "react-icons/ai"
 import { authClient } from "@/lib/auth-client"
-import { useRouter } from "next/navigation"
 import { toast } from "sonner"
 
 const SocialLogin = () => {
-  const router = useRouter()
-
   return (
     <Field className="grid grid-cols-2 gap-4">
       <Button

@@ -118,7 +118,7 @@ export function Navbar() {
                     <div className="flex flex-col space-y-1">
                       <p className="text-sm font-medium">{data.user.name}</p>
                       <p className="text-xs text-muted-foreground truncate">
-                        {data.user.email}
+                        {data.user.username ?? data.user.email}
                       </p>
                     </div>
                   </div>
@@ -178,7 +178,7 @@ export function Navbar() {
                       {item.label}
                     </Link>
                   ))}
-                  <div className="border-t border-border pt-4 flex flex-col space-y-2">
+                  <div className="border-t border-border pt-4 flex flex-col space-y-2 p-2">
                     {data ? (
                       <>
                         <div className="flex items-center gap-2 p-2 mb-2">
@@ -202,7 +202,7 @@ export function Navbar() {
                               {data.user.name}
                             </p>
                             <p className="text-xs text-muted-foreground">
-                              {data.user.email}
+                              {data.user.username ?? data.user.email}
                             </p>
                           </div>
                         </div>
