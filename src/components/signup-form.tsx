@@ -60,7 +60,7 @@ export function SignupForm({
 
       {
         onSuccess: () => {
-          router.push("/")
+          router.push("/dashboard")
         },
         onError: ({ error }) => {
           switch (error.code) {

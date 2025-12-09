@@ -9,6 +9,7 @@ import {
   LayoutDashboard,
   SunIcon,
   MoonIcon,
+  User2Icon,
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
@@ -88,28 +89,36 @@ export function Navbar() {
                     variant="ghost"
                     className="relative h-9 w-9 rounded-full"
                   >
-                    <Avatar className="h-9 w-9">
-                      <AvatarImage
-                        src="https://github.com/shadcn.png"
-                        alt="User"
-                      />
-                      <AvatarFallback>JD</AvatarFallback>
-                    </Avatar>
+                    {data.user.image ? (
+                      <Avatar className="h-8 w-8">
+                        <AvatarImage
+                          src={data.user.image as string}
+                          alt="User"
+                        />
+                        <AvatarFallback>{data.user.initials}</AvatarFallback>
+                      </Avatar>
+                    ) : (
+                      <Button
+                        variant={"outline"}
+                        size={"icon"}
+                        className="rounded-full"
+                      >
+                        <User2Icon />
+                      </Button>
+                    )}
                   </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end" className="w-56">
                   <div className="flex items-center justify-start gap-2 p-2">
                     <Avatar className="h-8 w-8">
-                      <AvatarImage
-                        src="https://github.com/shadcn.png"
-                        alt="User"
-                      />
-                      <AvatarFallback>JD</AvatarFallback>
+                      <AvatarImage src={data.user.image as string} alt="User" />
+                      <AvatarFallback>{data.user.initials}</AvatarFallback>
                     </Avatar>
+
                     <div className="flex flex-col space-y-1">
-                      <p className="text-sm font-medium">John Doe</p>
-                      <p className="text-xs text-muted-foreground">
-                        john@example.com
+                      <p className="text-sm font-medium">{data.user.name}</p>
+                      <p className="text-xs text-muted-foreground truncate">
+                        {data.user.email}
                       </p>
                     </div>
                   </div>
@@ -173,17 +182,27 @@ export function Navbar() {
                     {data ? (
                       <>
                         <div className="flex items-center gap-2 p-2 mb-2">
-                          <Avatar className="h-8 w-8">
-                            <AvatarImage
-                              src="https://github.com/shadcn.png"
-                              alt="User"
-                            />
-                            <AvatarFallback>JD</AvatarFallback>
-                          </Avatar>
+                          {data.user.image ? (
+                            <Avatar className="h-8 w-8">
+                              <AvatarImage
+                                src={data.user.image as string}
+                                alt="User"
+                              />
+                              <AvatarFallback>
+                                {data.user.initials}
+                              </AvatarFallback>
+                            </Avatar>
+                          ) : (
+                            <Button variant={"outline"} size={"icon"}>
+                              <User2Icon />
+                            </Button>
+                          )}
                           <div className="flex flex-col space-y-1">
-                            <p className="text-sm font-medium">John Doe</p>
+                            <p className="text-sm font-medium">
+                              {data.user.name}
+                            </p>
                             <p className="text-xs text-muted-foreground">
-                              john@example.com
+                              {data.user.email}
                             </p>
                           </div>
                         </div>

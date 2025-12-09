@@ -51,7 +51,7 @@ export function LoginForm({
       },
       {
         onSuccess: () => {
-          router.push("/profile")
+          router.push("/dashboard")
         },
         onError: () => {
           form.setError("email", { message: "" })

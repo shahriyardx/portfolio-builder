@@ -29,11 +29,9 @@ const SocialLogin = () => {
           await authClient.signIn.social(
             {
               provider: "github",
+              callbackURL: "/dashboard",
             },
             {
-              onSuccess: () => {
-                router.push("/profile")
-              },
               onError: (context) => {
                 toast.error(context.error.message)
               },
