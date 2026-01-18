@@ -25,6 +25,7 @@ import { useIsMobile } from "@/hooks/use-mobile"
 import { useTheme } from "next-themes"
 import useSession from "@/hooks/use-session"
 import { authClient } from "@/lib/auth-client"
+import Container from "./container"
 
 const navItems = [
   { label: "Home", href: "/" },
@@ -48,7 +49,7 @@ export function Navbar() {
 
   return (
     <nav className="border-b border-border bg-background sticky top-0 z-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <Container>
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <Link href="/" className="flex items-center space-x-2">
@@ -248,7 +249,7 @@ export function Navbar() {
             </Sheet>
           )}
         </div>
-      </div>
+      </Container>
     </nav>
   )
 }
