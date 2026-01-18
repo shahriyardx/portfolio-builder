@@ -63,7 +63,7 @@ export default function Features() {
                 key={feature.description}
                 className="p-6 rounded-lg border border-border hover:border-accent transition-colors bg-background"
               >
-                <Icon className="w-10 h-10 text-accent mb-4" />
+                <Icon className="w-10 h-10 text-primary mb-4" />
                 <h3 className="text-xl font-semibold text-foreground mb-3">
                   {feature.title}
                 </h3>

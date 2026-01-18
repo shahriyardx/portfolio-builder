@@ -43,8 +43,8 @@ export default function HowItWorks() {
           {steps.map((step) => (
             <div key={step.number} className="flex flex-col">
               <div className="mb-6">
-                <div className="w-16 h-16 rounded-full bg-accent/10 border-2 border-accent flex items-center justify-center">
-                  <span className="text-2xl font-bold text-accent-foreground">
+                <div className="w-16 h-16 rounded-full bg-primary/10 border-2 border-accent flex items-center justify-center">
+                  <span className="text-2xl font-bold text-primary-foreground">
                     {step.number}
                   </span>
                 </div>

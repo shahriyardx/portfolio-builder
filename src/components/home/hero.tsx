@@ -10,8 +10,8 @@ export default function Hero() {
       <div className="max-w-4xl mx-auto text-center space-y-8">
         <div className="space-y-6">
           <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold text-foreground text-balance">
-            Build Your Perfect <span className="text-accent">Portfolio</span> in
-            Minutes
+            Build Your Perfect <span className="text-primary">Portfolio</span>{" "}
+            in Minutes
           </h1>
           <p className="text-xl sm:text-2xl text-muted-foreground max-w-2xl mx-auto text-balance">
             Create a stunning professional portfolio without coding. Showcase
@@ -41,15 +41,15 @@ export default function Hero() {
 
         <div className="pt-12 flex flex-col sm:flex-row items-center justify-center gap-8 text-sm text-muted-foreground">
           <div className="flex items-center gap-2">
-            <div className="w-2 h-2 bg-accent rounded-full" />
+            <div className="w-2 h-2 bg-primary rounded-full" />
             <span>No credit card required</span>
           </div>
           <div className="flex items-center gap-2">
-            <div className="w-2 h-2 bg-accent rounded-full" />
+            <div className="w-2 h-2 bg-primary rounded-full" />
             <span>Deploy in seconds</span>
           </div>
           <div className="flex items-center gap-2">
-            <div className="w-2 h-2 bg-accent rounded-full" />
+            <div className="w-2 h-2 bg-primary rounded-full" />
             <span>Fully customizable</span>
           </div>
         </div>

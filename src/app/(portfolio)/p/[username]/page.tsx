@@ -4,12 +4,7 @@ import Container from "@/components/container"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { trpc } from "@/lib/trpc/client"
-import {
-  ArrowLeft,
-  CircleAlert,
-  ExternalLink,
-  Loader2,
-} from "lucide-react"
+import { ArrowLeft, CircleAlert, ExternalLink, Loader2 } from "lucide-react"
 import { Github, Linkedin, Mail } from "lucide-react"
 import Link from "next/link"
 import { useParams } from "next/navigation"
@@ -42,9 +37,7 @@ const Page = () => {
                 <div>
                   <nav className="flex items-center justify-between">
                     <div>
-                      <h1 className="text-xl font-bold text-primary">
-                        {data.name}
-                      </h1>
+                      <h1 className="text-xl font-bold">{data.name}</h1>
                       <p className="text-sm text-muted-foreground">
                         {data.role}
                       </p>
@@ -79,7 +72,7 @@ const Page = () => {
           <Container>
             <div className="mt-5">
               <div className="border-b-2 py-20">
-                <h1 className="text-4xl sm:text-5xl font-bold mb-2 text-primary text-pretty">
+                <h1 className="text-4xl sm:text-5xl font-bold mb-2 text-pretty">
                   {data.name}
                 </h1>
                 <div className="flex flex-col sm:flex-row sm:items-center gap-3 mb-3">
@@ -106,7 +99,7 @@ const Page = () => {
                     {data.portfolioLink && (
                       <Link
                         href={data.portfolioLink}
-                        className="px-6 py-3 bg-primary text-primary-foreground rounded-lg font-medium hover:opacity-90 transition-opacity"
+                        className="px-6 py-3 bg-primary-foreground rounded-lg font-medium hover:opacity-90 transition-opacity"
                       >
                         Get in Touch
                       </Link>
@@ -125,9 +118,7 @@ const Page = () => {
               </div>
 
               <div className="py-20 border-b-2">
-                <h2 className="text-3xl font-bold mb-16 text-primary">
-                  Experience
-                </h2>
+                <h2 className="text-3xl font-bold mb-16">Experience</h2>
 
                 <div className="space-y-12">
                   {data.experiences.map((exp) => (
@@ -145,7 +136,7 @@ const Page = () => {
                           </p>
                         </div>
                         <div className="flex flex-col sm:text-right mt-2 sm:mt-0">
-                          <span className="text-sm font-medium text-primary">
+                          <span className="text-sm font-medium">
                             {exp.startDate.getFullYear()} -{" "}
                             {exp.endDate
                               ? exp.endDate.getFullYear()
@@ -177,9 +168,7 @@ const Page = () => {
               </div>
 
               <div className="py-20 border-b-2">
-                <h2 className="text-3xl font-bold mb-16 text-primary">
-                  Projects
-                </h2>
+                <h2 className="text-3xl font-bold mb-16">Projects</h2>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                   {data.projects.map((project) => (
@@ -233,9 +222,7 @@ const Page = () => {
               </div>
 
               <div className="py-20 border-b-2">
-                <h2 className="text-3xl font-bold mb-16 text-primary">
-                  Skills & Languages
-                </h2>
+                <h2 className="text-3xl font-bold mb-16">Skills & Languages</h2>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                   <div>
@@ -273,9 +260,7 @@ const Page = () => {
               </div>
 
               <div className="py-20 border-b-2">
-                <h2 className="text-3xl font-bold mb-16 text-primary">
-                  Education
-                </h2>
+                <h2 className="text-3xl font-bold mb-16">Education</h2>
 
                 <div className="space-y-8">
                   {data.education.map((edu, idx) => (
@@ -309,9 +294,7 @@ const Page = () => {
                         </p>
 
                         {edu.grade && (
-                          <p className="text-sm font-medium text-primary">
-                            GPA {edu.grade}
-                          </p>
+                          <p className="text-sm font-medium">GPA {edu.grade}</p>
                         )}
                       </div>
                     </div>
@@ -321,7 +304,7 @@ const Page = () => {
 
               <div className="py-20">
                 <div className="flex flex-col items-center justify-center text-center">
-                  <h2 className="text-3xl sm:text-4xl font-bold mb-6 text-primary">
+                  <h2 className="text-3xl sm:text-4xl font-bold mb-6">
                     Let's Work Together
                   </h2>
 
@@ -331,12 +314,9 @@ const Page = () => {
                     collaborate or just chat about tech.
                   </p>
 
-                  <Link
-                    href={`mailto:${data.user.email}`}
-                    className="px-8 py-4 bg-primary text-primary-foreground rounded-lg font-semibold hover:opacity-90 transition-opacity mb-12 text-lg"
-                  >
-                    Get in Touch
-                  </Link>
+                  <Button asChild size={"lg"}>
+                    <Link href={`mailto:${data.user.email}`}>Get in Touch</Link>
+                  </Button>
                 </div>
               </div>
             </div>
