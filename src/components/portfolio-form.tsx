@@ -30,15 +30,17 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 import { Checkbox } from "@/components/ui/checkbox"
-import { X, Plus } from "lucide-react"
+import { X, Plus, ExternalLink } from "lucide-react"
+import Link from "next/link"
 
 type Props = {
   form: UseFormReturn<PortfolioFormData>
   onSubmit: (data: PortfolioFormData) => void
   isLoading: boolean
+  username?: string
 }
 
-export function PortfolioForm({ form, onSubmit, isLoading }: Props) {
+export function PortfolioForm({ form, onSubmit, isLoading, username }: Props) {
   const {
     fields: projectFields,
     append: appendProject,
@@ -87,11 +89,22 @@ export function PortfolioForm({ form, onSubmit, isLoading }: Props) {
   return (
     <div className="min-h-screen w-full bg-background p-6">
       <div className="mx-auto max-w-4xl space-y-6">
-        <div>
-          <h1 className="text-3xl font-bold">Portfolio Builder</h1>
-          <p className="text-muted-foreground mt-2">
-            Create and manage your complete portfolio
-          </p>
+        <div className="flex items-center justify-between">
+          <div>
+            <h1 className="text-3xl font-bold">Portfolio Builder</h1>
+            <p className="text-muted-foreground mt-2">
+              Create and manage your complete portfolio
+            </p>
+          </div>
+
+          {username && (
+            <Button asChild>
+              <Link target="_blank" href={`/p/${username}`}>
+                <ExternalLink />
+                Preview
+              </Link>
+            </Button>
+          )}
         </div>
 
         <Form {...form}>
@@ -959,7 +972,7 @@ export function PortfolioForm({ form, onSubmit, isLoading }: Props) {
                       endDate: undefined,
                       isCurrent: false,
                       responsibilities: "",
-                      technologies: [],
+                      technologies: "",
                     })
                   }
                 >

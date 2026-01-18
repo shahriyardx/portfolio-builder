@@ -1,8 +1,41 @@
 import { PortfolioSchema } from "@/lib/schemas"
-import { createTRPCRouter, protectedProcedure } from "../init"
+import { baseProcedure, createTRPCRouter, protectedProcedure } from "../init"
 import { prisma } from "@/lib/db"
+import z from "zod"
+import { username } from "better-auth/plugins"
 
 export const portfolioRouter = createTRPCRouter({
+  byUsername: baseProcedure
+    .input(
+      z.object({
+        username: z.string(),
+      }),
+    )
+    .query(async ({ input }) => {
+      const user = await prisma.user.findFirst({
+        where: {
+          username: input.username,
+        },
+      })
+
+      if (!user) {
+        return null
+      }
+
+      const portfolio = await prisma.portfolio.findFirst({
+        where: {
+          userId: user.id,
+        },
+        include: {
+          education: true,
+          experiences: true,
+          projects: true,
+          user: true,
+        },
+      })
+
+      return portfolio
+    }),
   myPortfolio: protectedProcedure.query(async ({ ctx }) => {
     const portfolio = await prisma.portfolio.findFirst({
       where: {
@@ -12,6 +45,9 @@ export const portfolioRouter = createTRPCRouter({
         education: true,
         experiences: true,
         projects: true,
+        user: {
+          select: { username: true },
+        },
       },
     })
 
@@ -43,7 +79,7 @@ export const portfolioRouter = createTRPCRouter({
                 description: e.description,
                 endYear: e.endYear,
                 fieldOfStudy: e.fieldOfStudy,
-                grade: e.degree,
+                grade: e.grade,
                 institution: e.institution,
                 startYear: e.startYear,
               })),

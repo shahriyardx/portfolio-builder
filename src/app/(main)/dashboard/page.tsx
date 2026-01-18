@@ -51,7 +51,7 @@ const Page = () => {
         description: e.description,
         endYear: e.endYear,
         fieldOfStudy: e.fieldOfStudy,
-        grade: e.degree,
+        grade: e.grade,
         institution: e.institution,
         startYear: e.startYear,
       })),
@@ -82,8 +82,15 @@ const Page = () => {
       {isLoading ? (
         <Loader2 className="animate-spin" />
       ) : (
-        // @ts-expect-error
-        <PortfolioForm form={form} onSubmit={onSubmit} isLoading={isPending} />
+        <div>
+          <PortfolioForm
+            // @ts-expect-error
+            form={form}
+            onSubmit={onSubmit}
+            isLoading={isPending}
+            username={data?.user.username ?? undefined}
+          />
+        </div>
       )}
     </div>
   )
