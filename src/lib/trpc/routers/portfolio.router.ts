@@ -2,7 +2,6 @@ import { PortfolioSchema } from "@/lib/schemas"
 import { baseProcedure, createTRPCRouter, protectedProcedure } from "../init"
 import { prisma } from "@/lib/db"
 import z from "zod"
-import { username } from "better-auth/plugins"
 
 export const portfolioRouter = createTRPCRouter({
   byUsername: baseProcedure

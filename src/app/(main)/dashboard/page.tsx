@@ -7,6 +7,7 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { Loader2 } from "lucide-react"
 import { useEffect } from "react"
 import { useForm } from "react-hook-form"
+import { toast } from "sonner"
 
 const Page = () => {
   const { data, isLoading } = trpc.portfolio.myPortfolio.useQuery()
@@ -41,7 +42,10 @@ const Page = () => {
     }
   }, [data, form.reset])
 
-  const { isPending, mutate } = trpc.portfolio.update.useMutation({})
+  const { isPending, mutate } = trpc.portfolio.update.useMutation({
+    onSuccess: () => toast.success("portfolio updated"),
+    onError: (e) => toast.error(e.message),
+  })
 
   const onSubmit = (data: PortfolioFormData) => {
     mutate({

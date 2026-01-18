@@ -63,23 +63,9 @@ export function Navbar() {
             </span>
           </Link>
 
-          {/* Desktop Menu */}
-          {!isMobile && (
-            <div className="hidden md:flex items-center space-x-1">
-              {navItems.map((item) => (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  className="px-3 py-2 rounded-md text-sm font-medium hover:bg-secondary transition-colors"
-                >
-                  {item.label}
-                </Link>
-              ))}
-            </div>
-          )}
 
           {/* Desktop Auth Section */}
-          <div className="hidden md:flex items-center space-x-2">
+          <div className="flex items-center space-x-2">
             <Button onClick={toggleTheme} size={"icon"} variant={"outline"}>
               <ThemeIcon size={15} />
             </Button>
@@ -149,105 +135,6 @@ export function Navbar() {
               </Button>
             )}
           </div>
-
-          {/* Mobile Menu */}
-          {isMobile && (
-            <Sheet open={isOpen} onOpenChange={setIsOpen}>
-              <SheetTrigger asChild>
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  className="md:hidden"
-                  aria-label="Toggle menu"
-                >
-                  {isOpen ? (
-                    <X className="h-5 w-5" />
-                  ) : (
-                    <Menu className="h-5 w-5" />
-                  )}
-                </Button>
-              </SheetTrigger>
-              <SheetContent side="right" className="w-64">
-                <div className="flex flex-col space-y-4 mt-8">
-                  {navItems.map((item) => (
-                    <Link
-                      key={item.href}
-                      href={item.href}
-                      className="px-3 py-2 rounded-md text-base font-medium hover:bg-secondary transition-colors"
-                      onClick={() => setIsOpen(false)}
-                    >
-                      {item.label}
-                    </Link>
-                  ))}
-                  <div className="border-t border-border pt-4 flex flex-col space-y-2 p-2">
-                    {data ? (
-                      <>
-                        <div className="flex items-center gap-2 p-2 mb-2">
-                          {data.user.image ? (
-                            <Avatar className="h-8 w-8">
-                              <AvatarImage
-                                src={data.user.image as string}
-                                alt="User"
-                              />
-                              <AvatarFallback>
-                                {data.user.initials}
-                              </AvatarFallback>
-                            </Avatar>
-                          ) : (
-                            <Button variant={"outline"} size={"icon"}>
-                              <User2Icon />
-                            </Button>
-                          )}
-                          <div className="flex flex-col space-y-1">
-                            <p className="text-sm font-medium">
-                              {data.user.name}
-                            </p>
-                            <p className="text-xs text-muted-foreground">
-                              {data.user.username ?? data.user.email}
-                            </p>
-                          </div>
-                        </div>
-                        <Button
-                          variant="outline"
-                          className="w-full bg-transparent"
-                          asChild
-                        >
-                          <Link
-                            href="/dashboard"
-                            onClick={() => setIsOpen(false)}
-                          >
-                            <LayoutDashboard className="mr-2 h-4 w-4" />
-                            Dashboard
-                          </Link>
-                        </Button>
-                        <Button
-                          variant="destructive"
-                          className="w-full"
-                          onClick={() => {
-                            authClient.signOut()
-                            setIsOpen(false)
-                          }}
-                        >
-                          <LogOut className="mr-2 h-4 w-4" />
-                          Sign Out
-                        </Button>
-                      </>
-                    ) : (
-                      <div className="p-3">
-                        <Button
-                          variant="outline"
-                          className="w-full bg-transparent"
-                          asChild
-                        >
-                          <Link href={"/auth/sign-in"}>Sign In</Link>
-                        </Button>
-                      </div>
-                    )}
-                  </div>
-                </div>
-              </SheetContent>
-            </Sheet>
-          )}
         </div>
       </Container>
     </nav>
