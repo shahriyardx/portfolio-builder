@@ -88,15 +88,15 @@ enum WorkType {
 }
 
 model Project {
-  id           String   @id
+  id           String  @id @default(cuid())
   title        String
   description  String
   image        String
   repoLink     String?
   liveLink     String?
-  technologies String[]
+  technologies String
 
-  portfolio   Portfolio? @relation(fields: [portfolioId], references: [id])
+  portfolio   Portfolio? @relation(fields: [portfolioId], references: [id], onDelete: Cascade)
   portfolioId String?
 
   createdAt DateTime @default(now())
@@ -131,7 +131,7 @@ model Experience {
   isCurrent Boolean   @default(false)
 
   responsibilities String?
-  technologies     String[]
+  technologies     String
 
   portfolioId String
   portfolio   Portfolio @relation(fields: [portfolioId], references: [id], onDelete: Cascade)

@@ -22,9 +22,11 @@ const ProjectSchema = z.object({
 
   image: z.url("Image must be a valid URL").min(1, "Project image is required"),
 
-  repoLink: z.preprocess(emptyToUndefined, z.string().url().optional()),
-
-  liveLink: z.url("Live link must be a valid URL").optional().or(z.literal("")),
+  repoLink: z.preprocess(emptyToUndefined, z.url().optional()),
+  liveLink: z.preprocess(
+    emptyToUndefined,
+    z.url("Live link must be a valid URL").optional(),
+  ),
   technologies: z.string().min(1, "Technology cannot be empty"),
 })
 
@@ -103,9 +105,7 @@ const ExperienceSchema = z
       .optional()
       .or(z.literal("")),
 
-    technologies: z
-      .array(z.string().min(1, "Technology cannot be empty"))
-      .optional(),
+    technologies: z.string().min(1, "Technology cannot be empty"),
   })
   .refine((data) => !data.endDate || !data.isCurrent, {
     message: "End date cannot be set for current employment",
