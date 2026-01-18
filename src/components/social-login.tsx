@@ -3,7 +3,7 @@
 import { Field } from "./ui/field"
 import { Button } from "./ui/button"
 import { AiOutlineGithub } from "react-icons/ai"
-import { authClient } from "@/lib/auth-client"
+import { authClient } from "@/lib/auth/auth-client"
 import { toast } from "sonner"
 
 const SocialLogin = () => {

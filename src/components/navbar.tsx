@@ -24,7 +24,7 @@ import {
 import { useIsMobile } from "@/hooks/use-mobile"
 import { useTheme } from "next-themes"
 import useSession from "@/hooks/use-session"
-import { authClient } from "@/lib/auth-client"
+import { authClient } from "@/lib/auth/auth-client"
 import Container from "./container"
 
 const navItems = [

@@ -23,7 +23,7 @@ import {
   FormLabel,
   FormMessage,
 } from "./ui/form"
-import { authClient } from "@/lib/auth-client"
+import { authClient } from "@/lib/auth/auth-client"
 import { useRouter } from "next/navigation"
 import SocialLogin from "./social-login"
 

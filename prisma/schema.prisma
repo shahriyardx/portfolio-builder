@@ -14,18 +14,19 @@ datasource db {
 }
 
 model User {
-  id              String    @id
+  id              String     @id
   name            String
   email           String
-  emailVerified   Boolean   @default(false)
+  emailVerified   Boolean    @default(false)
   image           String?
-  createdAt       DateTime  @default(now())
-  updatedAt       DateTime  @updatedAt
+  createdAt       DateTime   @default(now())
+  updatedAt       DateTime   @updatedAt
   username        String?
   displayUsername String?
-  role            String?   @default("USER")
+  role            String?    @default("USER")
   sessions        Session[]
   accounts        Account[]
+  portfolio       Portfolio?
 
   @@unique([email])
   @@unique([username])
@@ -78,4 +79,90 @@ model Verification {
 
   @@index([identifier])
   @@map("verification")
+}
+
+enum WorkType {
+  REMOTE
+  ONSITE
+  HYBRID
+}
+
+model Project {
+  id           String   @id
+  title        String
+  description  String
+  image        String
+  repoLink     String?
+  liveLink     String?
+  technologies String[]
+
+  portfolio   Portfolio? @relation(fields: [portfolioId], references: [id])
+  portfolioId String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Education {
+  id           String  @id @default(cuid())
+  degree       String
+  institution  String
+  fieldOfStudy String?
+  startYear    Int
+  endYear      Int?
+  grade        String?
+  description  String?
+
+  portfolioId String
+  portfolio   Portfolio @relation(fields: [portfolioId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+}
+
+model Experience {
+  id             String    @id @default(cuid())
+  role           String
+  company        String
+  location       String?
+  employmentType WorkType?
+
+  startDate DateTime
+  endDate   DateTime?
+  isCurrent Boolean   @default(false)
+
+  responsibilities String?
+  technologies     String[]
+
+  portfolioId String
+  portfolio   Portfolio @relation(fields: [portfolioId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+}
+
+model Portfolio {
+  id       String  @id @default(cuid())
+  userId   String  @unique
+  name     String
+  role     String
+  location String?
+  bio      String?
+
+  workType WorkType
+
+  githubLink    String?
+  linkedinLink  String?
+  portfolioLink String?
+  resumeLink    String?
+
+  languages String[]
+  skills    String[]
+
+  projects    Project[]
+  education   Education[]
+  experiences Experience[]
+
+  user User @relation(fields: [userId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
