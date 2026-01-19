@@ -10,7 +10,7 @@ import { useForm } from "react-hook-form"
 import { toast } from "sonner"
 
 const Page = () => {
-  const { data, isLoading } = trpc.portfolio.myPortfolio.useQuery()
+  const { data, isLoading, refetch } = trpc.portfolio.myPortfolio.useQuery()
   const form = useForm<PortfolioFormData>({
     // @ts-expect-error
     resolver: zodResolver(PortfolioSchema),
@@ -43,7 +43,10 @@ const Page = () => {
   }, [data, form.reset])
 
   const { isPending, mutate } = trpc.portfolio.update.useMutation({
-    onSuccess: () => toast.success("portfolio updated"),
+    onSuccess: () => {
+      toast.success("portfolio updated")
+      refetch()
+    },
     onError: (e) => toast.error(e.message),
   })
 
