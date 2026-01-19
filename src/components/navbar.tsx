@@ -1,10 +1,7 @@
 "use client"
 
-import { useState } from "react"
 import Link from "next/link"
 import {
-  Menu,
-  X,
   LogOut,
   LayoutDashboard,
   SunIcon,
@@ -12,7 +9,6 @@ import {
   User2Icon,
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar"
 import {
   DropdownMenu,
@@ -21,26 +17,17 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import { useIsMobile } from "@/hooks/use-mobile"
 import { useTheme } from "next-themes"
 import useSession from "@/hooks/use-session"
 import { authClient } from "@/lib/auth/auth-client"
 import Container from "./container"
 
-const navItems = [
-  { label: "Home", href: "/" },
-  { label: "About", href: "/about" },
-  { label: "Services", href: "/services" },
-  { label: "Contact", href: "/contact" },
-]
 
 export function Navbar() {
   const { theme, setTheme } = useTheme()
-  const [isOpen, setIsOpen] = useState(false)
-  const isMobile = useIsMobile()
 
   const { data } = useSession()
-  console.log(data)
+
   const toggleTheme = () => {
     setTheme(theme === "dark" ? "light" : "dark")
   }

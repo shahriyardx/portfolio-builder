@@ -982,7 +982,6 @@ export function PortfolioForm({ form, onSubmit, isLoading, username }: Props) {
               </CardContent>
             </Card>
 
-            {/* Submit Button */}
             <div className="flex gap-2">
               <Button type="submit" disabled={isLoading} className="flex-1">
                 {isLoading ? "Saving..." : "Save Portfolio"}
