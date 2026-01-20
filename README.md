@@ -1,11 +1,9 @@
 # Portfolio Builder 
 
-A modern **Portfolio Builder** that lets anyone easily create, customize, and publish a professional developer portfolio — no design skills required.
-
-This project is built for developers, designers, and students who want to showcase their work, skills, and experience in a clean and customizable way.
+A modern **Portfolio Builder** that lets anyone easily create, customize, and publish a professional developer portfolio — no design skills required. This project is built for developers, designers, and students who want to showcase their work, skills, and experience in a clean and customizable way.
 
 # Install & Run
-First clone the repository and then run the following commands
+First clone the repository then make a .env file from .env.example, populate the file with correct credentials and then run the following commands
 
 ```sh
 yarn install # install dependencies
@@ -24,3 +22,5 @@ yarn prisma generate # generates the models
 ```sh
 yarn dev # runs the project
 ```
+
+After running all the commands you can visit the live site at http://localhost:3000
